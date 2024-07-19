@@ -2,16 +2,16 @@ import streamlit as st
 import pandas as pd
 import random
 import string
-from faker import Faker
+# from faker import Faker
 
-fake = Faker()
+# fake = Faker()
 
 def generate_random_string(length=8):
     letters_and_digits = string.ascii_letters + string.digits
     return ''.join(random.choice(letters_and_digits) for i in range(length))
 
-def pseudonymize_value():
-    return fake.first_name() + " " + fake.last_name()
+# def pseudonymize_value():
+#     return fake.first_name() + " " + fake.last_name()
 
 def custom_id_generator(base_string, index):
     return f"{base_string}{index}"
@@ -25,9 +25,9 @@ def pseudonymize_columns(df, columns, method, custom_id_base=None):
             custom_id_base = "id"
         for column in columns:
             df[column] = [custom_id_generator(custom_id_base, i) for i in range(1, len(df) + 1)]
-    elif method == "랜덤 이름":
-        for column in columns:
-            df[column] = df[column].apply(lambda x: pseudonymize_value())
+    # elif method == "랜덤 이름":
+    #     for column in columns:
+    #         df[column] = df[column].apply(lambda x: pseudonymize_value())
     return df
 
 def main():
