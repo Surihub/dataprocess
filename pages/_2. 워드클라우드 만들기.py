@@ -28,7 +28,7 @@ def extract_nouns(text):
 def generate_wordcloud(text, colormap, width, height, margin):
     font_path = './NanumSquareNeo.ttf'  # 폰트 파일이 있는 경로
     wordcloud = WordCloud(font_path=font_path, background_color='white', colormap=colormap, width=width, height=height, margin=margin).generate(text)
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(15, 15))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
     buf = BytesIO()
@@ -37,8 +37,8 @@ def generate_wordcloud(text, colormap, width, height, margin):
     return buf
 
 def main():
-    st.title("워드클라우드 생성 앱")
-    st.info("아래에 텍스트를 입력하면 워드클라우드가 생성됩니다.")
+    st.title("☁️ 워드클라우드 생성 앱")
+    st.info("아래에 텍스트를 입력하면 워드클라우드가 생성됩니다.", icon = "👩🏻‍💻")
 
     text = st.text_area("워드클라우드에 사용할 텍스트를 여기에 입력하세요.")
     
@@ -51,7 +51,7 @@ def main():
 
     width = 1000
     height = 1000
-    margin = 5
+    margin = 1
 
     if st.button("워드클라우드 생성"):
         if text:

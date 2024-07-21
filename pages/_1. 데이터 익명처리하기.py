@@ -31,8 +31,8 @@ def pseudonymize_columns(df, columns, method, custom_id_base=None):
     return df
 
 def main():
-    st.title("데이터 익명 처리 앱")
-    st.info("개인정보가 포함된 데이터를 여러 옵션으로 익명화할 수 있습니다. \n데이터(csv 파일)를 업로드 한 후 옵션을 설정하여 익명처리 합니다. 올바르게 익명처리가 되었다면 다운로드 받기 버튼을 클릭해주세요. 업로드된 데이터는 별도의 서버에 저장되지 않습니다. ")
+    st.title("📇 데이터 익명 처리 앱")
+    st.info("개인정보가 포함된 데이터를 여러 옵션으로 익명화할 수 있습니다. \n데이터(csv 파일)를 업로드 한 후 옵션을 설정하여 익명처리 합니다. 올바르게 익명처리가 되었다면 다운로드 받기 버튼을 클릭해주세요. 업로드된 데이터는 별도의 서버에 저장되지 않습니다. ", icon = "👩🏻‍💻")
     uploaded_file = st.file_uploader("CSV 파일 업로드", type=["csv", "xlsx"])
     if uploaded_file is not None:
         encoding_options = ['utf-8', 'euc-kr', 'latin-1']
