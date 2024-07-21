@@ -2,16 +2,10 @@ import streamlit as st
 import pandas as pd
 import random
 import string
-# from faker import Faker
-
-# fake = Faker()
 
 def generate_random_string(length=8):
     letters_and_digits = string.ascii_letters + string.digits
     return ''.join(random.choice(letters_and_digits) for i in range(length))
-
-# def pseudonymize_value():
-#     return fake.first_name() + " " + fake.last_name()
 
 def custom_id_generator(base_string, index):
     return f"{base_string}{index}"
