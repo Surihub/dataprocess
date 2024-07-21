@@ -4,6 +4,11 @@ import random
 import string
 from faker import Faker
 
+fake = Faker()
+
+def generate_random_name():
+    return fake.name()
+
 def generate_random_string(length=8):
     letters_and_digits = string.ascii_letters + string.digits
     return ''.join(random.choice(letters_and_digits) for i in range(length))
@@ -20,9 +25,9 @@ def pseudonymize_columns(df, columns, method, custom_id_base=None):
             custom_id_base = "id"
         for column in columns:
             df[column] = [custom_id_generator(custom_id_base, i) for i in range(1, len(df) + 1)]
-    # elif method == "랜덤 이름":
-    #     for column in columns:
-    #         df[column] = df[column].apply(lambda x: pseudonymize_value())
+    elif method == "랜덤 이름":
+        for column in columns:
+            df[column] = df[column].apply(lambda x: generate_random_name())
     return df
 
 def main():
@@ -73,3 +78,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+else:
+    st.warning("익명 처리할 열을 하나 이상 선택하세요.")
+
