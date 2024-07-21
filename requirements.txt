@@ -1,3 +1,4 @@
 streamlit
 kiwipiepy
 wordcloud
+faker

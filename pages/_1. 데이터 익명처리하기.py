@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import random
 import string
+from faker import Faker
 
 def generate_random_string(length=8):
     letters_and_digits = string.ascii_letters + string.digits
@@ -33,7 +34,7 @@ def main():
         encoding = st.radio("인코딩 오류가 날 경우, 다른 옵션으로 선택해보세요!", encoding_options, index=0)
         if uploaded_file.name.endswith('.csv'):
             try:
-                df = pd.read_csv(uploaded_file, encoding=encoding, error_bad_lines=False)
+                df = pd.read_csv(uploaded_file, encoding=encoding)
             except UnicodeDecodeError:
                 st.error(f"파일을 읽는 도중 인코딩 에러가 발생했습니다. 선택한 인코딩({encoding})이 맞는지 확인해주세요.")
                 return
