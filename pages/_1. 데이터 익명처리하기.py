@@ -33,13 +33,18 @@ def pseudonymize_columns(df, columns, method, custom_id_base=None):
 def main():
     st.title("데이터 익명 처리 앱")
     st.info("개인정보가 포함된 데이터를 여러 옵션으로 익명화할 수 있습니다. \n데이터(csv 파일)를 업로드 한 후 옵션을 설정하여 익명처리 합니다. 올바르게 익명처리가 되었다면 다운로드 받기 버튼을 클릭해주세요. 업로드된 데이터는 별도의 서버에 저장되지 않습니다. ")
-
     uploaded_file = st.file_uploader("CSV 파일 업로드", type=["csv", "xlsx"])
     if uploaded_file is not None:
+        encoding_options = ['utf-8', 'euc-kr', 'latin-1']
+        encoding = st.radio("인코딩 오류가 날 경우, 다른 옵션으로 선택해보세요!", encoding_options, index=0)
         if uploaded_file.name.endswith('.csv'):
-            df = pd.read_csv(uploaded_file, encoding='euc-kr')
+            try:
+                df = pd.read_csv(uploaded_file, encoding=encoding, error_bad_lines=False)
+            except UnicodeDecodeError:
+                st.error(f"파일을 읽는 도중 인코딩 에러가 발생했습니다. 선택한 인코딩({encoding})이 맞는지 확인해주세요.")
+                return
         elif uploaded_file.name.endswith('.xlsx'):
-            df = pd.read_excel(uploaded_file)
+            df = pd.read_excel(uploaded_file, error_bad_lines=False)
         st.write("원본 데이터:")
         st.write(df)
 
@@ -61,7 +66,7 @@ def main():
                 st.write("익명 처리된 데이터:")
                 st.write(df_pseudonymized)
                 
-                csv = df_pseudonymized.to_csv(index=False).encode('euc-kr')
+                csv = df_pseudonymized.to_csv(index=False).encode('utf-8')
                 st.download_button(
                     "익명 처리된 CSV 다운로드",
                     data=csv,
