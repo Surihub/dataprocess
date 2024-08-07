@@ -9,11 +9,10 @@ kiwi = Kiwi()
 
 # 한글 컬러맵과 실제 컬러맵 이름 매칭
 colormap_dict = {
-    "녹색": "viridis",
-    "다채로운": "plasma",
-    "불꽃색": "inferno",
-    "용암색": "magma",
-    "황색": "cividis",
+    "다채로운(플라즈마)": "plasma",
+    "불꽃(인페르노)": "inferno",
+    "용암(마그마)": "magma",
+    "황색(시비디스)": "cividis",
     "파란색": "Blues",
     "초록색": "Greens",
     "빨간색": "Reds",
